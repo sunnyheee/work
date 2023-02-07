@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=ß, initial-scale=1.0">
+    <title>input error</title>
+</head>
+<body>
+    <span>カタカナ</span><input type="text" id="name-gaku" value="" onblur="isZenKakuKataKana(this,'#error01')" onkeyup="isZenKakuKataKana(this,'#error01')">
+    <div id="error01"></div>
+    <script>
+    var katakanaArray = [
+      'ア', 'イ', 'ウ', 'エ', 'オ', 
+      'カ', 'キ', 'ク', 'ケ', 'コ', 
+      'サ', 'シ', 'ス', 'セ', 'ソ', 
+      'タ', 'チ', 'ツ', 'テ', 'ト', 
+      'ナ', 'ニ', 'ヌ', 'ネ', 'ノ', 
+      'ハ', 'ヒ', 'フ', 'ヘ', 'ホ', 
+      'マ', 'ミ', 'ム', 'メ', 'モ', 
+      'ヤ',      'ユ',      'ヨ', 
+      'ラ', 'リ', 'ル', 'レ', 'ロ', 
+      'ワ', 'ヰ',      'ヱ', 'ヲ', 
+                          'ン',
+      'ガ', 'ギ', 'グ', 'ゲ', 'ゴ', 
+      'ザ', 'ジ', 'ズ', 'ゼ', 'ゾ', 
+      'ダ', 'ヂ', 'ヅ', 'デ', 'ド', 
+      'バ', 'ビ', 'ブ', 'ベ', 'ボ', 
+      'パ', 'ピ', 'プ', 'ペ', 'ポ'
+  ]
+  function isZenKakuKataKana(node, errorSlot) {
+    var value = node.value;
+    var valueLength = node.value.length;
+    document.querySelector(errorSlot).innerHTML = "";
+    var errorMsg = "全角カタカナでご入力ください。"
+    if(valueLength == 0){
+      document.querySelector(errorSlot).innerHTML = errorMsg;
+    }
+    for(var char=0; char<valueLength; char++){
+      if(katakanaArray.indexOf(value[char]) == -1){
+        document.querySelector(errorSlot).innerHTML = errorMsg;
+        break;
+      }
+    }
+  }
+  </script>
+</body>
+</html>
