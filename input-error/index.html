@@ -10,7 +10,7 @@
     <span>ふりがな</span><input type="text" id="name-gaku" value="" onblur="isZenKakuKataKana(this,'#error01')" onkeyup="isZenKakuKataKana(this,'#error01')">
     <div id="error01"></div>
     <script>
-    var katakanaArray = [
+  var katakanaArray = [
       'ア', 'イ', 'ウ', 'エ', 'オ', 
       'カ', 'キ', 'ク', 'ケ', 'コ', 
       'サ', 'シ', 'ス', 'セ', 'ソ', 
@@ -34,15 +34,50 @@
     document.querySelector(errorSlot).innerHTML = "";
     var errorMsg = "全角カタカナでご入力ください。"
     if(valueLength == 0){
-      document.querySelector(errorSlot).innerHTML = errorMsg;
-    }
-    for(var char=0; char<valueLength; char++){
-      if(katakanaArray.indexOf(value[char]) == -1){
-        document.querySelector(errorSlot).innerHTML = errorMsg;
-        break;
+      // remove error message
+      document.querySelector(errorSlot).innerHTML = "";
+      // make gray color for border of textbox
+      node.style.border = "3px solid gray";
+      // disable default outline
+      node.style.outline = "none";
+      // make gray background color
+      node.style.backgroundColor = "gray";
+    } else {
+      var errorFoundFlag = false;
+      for(var char=0; char<valueLength; char++) {
+        // for error handling
+        if(katakanaArray.indexOf(value[char]) == -1){
+          // show error message
+          document.querySelector(errorSlot).innerHTML = errorMsg;
+          // make red color for error message
+          document.querySelector(errorSlot).style.color = "red";
+
+          // make red color for border of textbox
+          node.style.border = "3px solid red";
+          // disable default outline
+          node.style.outline = "none";
+          // make red color for text
+          node.style.color = "red";
+          // make gray background color
+          node.style.backgroundColor = "gray";
+
+          errorFoundFlag = true;
+          break;
+        }
+      }
+      if(!errorFoundFlag) {
+          // make red color for border of textbox
+          node.style.border = "3px solid black";
+          // disable default outline
+          node.style.outline = "none";
+          // make red color for text
+          node.style.color = "black";
+          // make gray background color
+          node.style.backgroundColor = "white";
       }
     }
   }
   </script>
+
 </body>
 </html>
